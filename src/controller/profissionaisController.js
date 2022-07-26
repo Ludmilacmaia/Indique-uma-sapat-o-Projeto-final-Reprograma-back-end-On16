@@ -88,7 +88,7 @@ const updateProfissional = async (req, res) => {
         bairro,
         atendimentoRemoto,
         telefone,
-        email,
+        site,
     });
     res.status(200).json(updatedDoula);
   } catch (error) {
