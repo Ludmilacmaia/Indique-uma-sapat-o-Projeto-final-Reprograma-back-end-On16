@@ -10,7 +10,7 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "start": "nodemon server.js",
-    "swagger-autogen":"node swagger.js"
+    "swagger-autogen": "node swagger.js"
   },
   "repository": {
     "type": "git",

@@ -1,11 +1,11 @@
 const express = require('express');
-const index = require('./routes/index');
-const doulas = require('./routes/profissionaisRoutes');
+const index = require('./router/index.js');
+const profissionais = require('./router/profissionaisRouter.js');
 const mongoose = require('./database/mongooseConnect');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('../swagger/swagger_output.json');
-const admRoutes = require('./routes/admRoutes');
-const profissionais = require('./models/profissionaisModel');
+const admRouter = require('./router/admRouter.js');
+
 
 
 require("dotenv").config()
@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
 app.use('/', index);
 app.use('/profissionais', profissionais);
 app.use('/minha-rota-de-documentacao', swaggerUi.serve, swaggerUi.setup(swaggerFile));
-app.use(admRoutes)
+app.use(admRouter)
 
 
 module.exports = app
