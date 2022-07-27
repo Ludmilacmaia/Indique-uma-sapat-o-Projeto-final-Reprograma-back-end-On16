@@ -1,9 +1,11 @@
-const profissionais = require("../models/profissionaisModels.js");
+const profissionais = require("../models/profissionaisModel")
+const jwt = require("jsonwebtoken")
+const SECRET = process.env.SECRET
 
 const getAll = (req, res) => {
   profissionais.find((err, profissionais) => {
     if (err) {
-      res.status(500).send({ message: "erro no servidor" });
+      res.status(500).send({ message: err.message });
     } else {
       res.status(200).json(profissionais);
     }
@@ -34,19 +36,22 @@ const getByProfissao = (req, res) => {
     });
   };
 
-// const getByBairro = async (req, res) => {
-//   try {
-//     const { bairro } = req.query;
-//     const findBairro = await profissionaisModel.find({ bairro: bairro });
-//     res.status(200).json(findBairro);
-//   } catch (err) {
-//     res.status(500).send({ message: "Bairro não encontrado" });
-//   }
-// };
 
 const createProfissional = async (req, res) => {
   try {
-    const { nome, profissao, bairro, atendimentoRemoto telefone, email } = req.body;
+    const authHeader = req.get("autorizada")
+    if (!authHeader) {
+      return res.status(401).json("você precisa de autorização")
+    }
+    const token = authHeader.split(" ")[1]
+    await jwt.verify(token, SECRET, async function (erro) {
+      if (erro) {
+        return res.status(403).send("Acesso negado")
+      }
+      const allProfissionais = await profissionais.find()
+      res.status(200).json(allProfissionais)
+    })
+    const { nome, profissao, bairro, atendimentoRemoto, telefone, site } = req.body;
 
     const newProfissional = new profissionais({
       nome,
@@ -54,28 +59,15 @@ const createProfissional = async (req, res) => {
       bairro,
       atendimentoRemoto,
       telefone,
-      email,
+      site,
     });
 
     const savedProfissional = await newProfissional.save();
-
     res.status(201).json(savedProfissional);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
   }
-};
-
-const changeProfissional = (req, res) => {
-  const id = req.params.id;
-
-  doulas.findByIdAndUpdate(id, { $set: req.body }, (err) => {
-    if (!err) {
-      res.status(200).json({ message: "Profissional atualizada com sucesso" });
-    } else {
-      res.status(500).send({ message: err.message });
-    }
-  });
 };
 
 const updateProfissional = async (req, res) => {
@@ -113,9 +105,8 @@ module.exports = {
   getAll,
   getById,
   getByProfissao,
-  //getByBairro,
   createProfissional,
-  changeProfissional,
   updateProfissional,
   deleteProfissional,
 };
+

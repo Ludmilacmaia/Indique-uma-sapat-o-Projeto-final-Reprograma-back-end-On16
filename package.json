@@ -1,5 +1,5 @@
 {
-  "name": "indique-uma-sapat-o-projeto-final-reprograma-back-end-on16",
+  "name": "Labrys",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -14,15 +14,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ludmilacmaia/Indique-uma-sapat-o-Projeto-final-Reprograma-back-end-On16.git"
+    "url": "git+https://github.com/Ludmilacmaia/Labrys.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Ludmilacmaia/Indique-uma-sapat-o-Projeto-final-Reprograma-back-end-On16/issues"
+    "url": "https://github.com/Ludmilacmaia/Labrys/issues"
   },
-  "homepage": "https://github.com/Ludmilacmaia/Indique-uma-sapat-o-Projeto-final-Reprograma-back-end-On16#readme",
+  "homepage": "https://github.com/Ludmilacmaia/Labrys#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
