@@ -1,12 +1,12 @@
 const express = require ("express");
 
-const router = express.Router();
+const routes = express.Router();
 
-router.get('/', function (req, res) {
+routes.get('/', function (req, res) {
     res.status(200).send({
         title: "Labrys",
         version: "1.0.0"
     })
 });
 
-module.exports = router;
+module.exports = routes;

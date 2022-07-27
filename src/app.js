@@ -1,10 +1,10 @@
 const express = require('express');
-const index = require('./router/index.js');
-const profissionais = require('./router/profissionaisRouter.js');
+const index = require('./routes/index.js');
+const profissionais = require('./routes/profissionaisRoutes.js');
 const mongoose = require('./database/mongooseConnect');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('../swagger/swagger_output.json');
-const admRouter = require('./router/admRouter.js');
+const admRoutes = require('./routes/admRoutes.js');
 
 
 
@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
 app.use('/', index);
 app.use('/profissionais', profissionais);
 app.use('/minha-rota-de-documentacao', swaggerUi.serve, swaggerUi.setup(swaggerFile));
-app.use(admRouter)
+app.use(admRoutes)
 
 
 module.exports = app
