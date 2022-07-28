@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const profissionaisSchema = new mongoose.Schema({
-  id: { type: String },
+  _id: { type: String },
   nome: { type: String, required: true },
   profissao: { type: String, required: true },
   bairro: { type: String, required: false },
@@ -13,4 +13,4 @@ const profissionaisSchema = new mongoose.Schema({
 
 const profissionais = mongoose.model('profissionais', profissionaisSchema);
 
-module.exports = profissionais;
+module.exports = profissionais
