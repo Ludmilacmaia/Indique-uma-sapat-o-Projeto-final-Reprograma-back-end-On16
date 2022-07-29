@@ -7,7 +7,7 @@ routes.get("/todas", controller.getAll);
 routes.get('/profissao', controller.getByProfissao);
 routes.get('/:id', controller.getById);
 routes.post('/create', controller.createProfissional);
-routes.patch('/:id', controller.updateProfissional);
+routes.patch('/:nome', controller.updateProfissional);
 routes.delete('/:id', controller.deleteProfissional);
 
 

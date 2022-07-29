@@ -1,5 +1,4 @@
 const profissional = require("../models/profissionaisModel")
-const jwt = require("jsonwebtoken")
 const SECRET = process.env.SECRET
 
 const getAll = async (req, res) => {
@@ -39,56 +38,42 @@ const getByProfissao = (req, res) => {
     });
   };
 
-
-const createProfissional = async (req, res) => {
-  try {
-
-      const allprofissionais = await profissional.find()
-      res.status(200).json(allprofissionais)
-    
-    const { nome, profissao, bairro, atendimentoRemoto, telefone, site } = req.body;
-
-    const newProfissional = new profissional({
-      nome,
-      profissao,
-      bairro,
-      atendimentoRemoto,
-      telefone,
-      site,
-    });
-
-    const savedProfissional = await newProfissional.save();
-    res.status(201).json(savedProfissional);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: error.message });
+  const createProfissional = async (req, res) => {
+    try {
+      
+  
+        const { nome, profissao, bairro, atendimentoRemoto, telefone, site } = req.body
+  
+        const newProfissional = new profissional ({
+          nome, profissao, bairro, atendimentoRemoto, telefone, site
+        })
+  
+        const savedProfissional = await newProfissional.save()
+  
+        res.status(201).json(savedProfissional)
+      } catch (error) {
+      console.error(error)
+      res.status(500).json({ message: error.message })
+    }
   }
-};
 
-
-const updateProfissional = async (req, res) => {
-   
-          const { nome, profissao, bairro, atendimentoRemoto, telefone, site } = req.body
-          const { _id } = req.params
-
-          const findProfissional = await profissional.findById(_id)
-
-          if (findProfissional == null) {
-              return res.status(404).json({ message: "id inválido" })
-          }
-
-          findProfissional.nome = nome || findProfissional.nome
-          findProfissional.profissao = profissao || findProfissional.profissao
-          findProfissional.bairro = bairro || findProfissional.bairro
-          findProfissional.atendimentoRemoto = atendimentoRemoto || findProfissional.atendimentoRemoto
-          findProfissional.telefone = telefone || findProfissional.telefone
-          findProfissional.site = site || findProfissional.site
-
-          const savedProfissional = findProfissional.save()
-          res.status(200).json({ message: "profissional atualizada com sucesso!", savedProfissional })
-      }
+  const updateProfissional = async (req, res) => {
+    try {
+      
+        const { nome, profissao, bairro, atendimentoRemoto, telefone, site } = req.body
+        await profissional
+          .findByIdAndUpdate(req.params.id, {
+            nome, profissao, bairro, atendimentoRemoto, telefone, site
+          })
+        const updatedProfissional = await profissional.findById(req.params.id)
+        res.status(200).json(updatedProfissional)
   
-  
+      } catch (error) {
+      console.error(error)
+      res.status(500).json({ message: error.message })
+    }
+  }
+
 
 const deleteProfissional = (req, res) => {
   const id = req.params.id

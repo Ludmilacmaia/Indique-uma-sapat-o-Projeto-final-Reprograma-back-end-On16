@@ -1,16 +1,47 @@
-const mongoose = require("mongoose");
+const mongoose = require ('mongoose')
 
-const profissionaisSchema = new mongoose.Schema({
-  _id: { type: String },
-  nome: { type: String, required: true },
-  profissao: { type: String, required: true },
-  bairro: { type: String, required: false },
-  atendimentoRemoto: {type: Boolean, required: true},
-  telefone: { type: Number, required: true },
-  site: { type: String, required: false }
-});
+const profissionaisSchema = mongoose.Schema({
+    _id: {
+        type: mongoose.Types.ObjectId,
+        default: mongoose.Types.ObjectId
+    },
+    nome:{
+        type: String, 
+        required: true,
 
+    },
 
-const profissionais = mongoose.model('profissionais', profissionaisSchema);
+    profissao:{
+        type: String,
+        required: true,
+        
+    },
 
-module.exports = profissionais
+    bairro:{
+        type: String,
+        required: false,
+
+    },
+
+    atendimentoRemoto:{
+        type: Boolean,
+        required: true,
+    },
+
+    telefone:{
+        type: Number,
+        required: true,
+  
+
+    },
+    site:{
+      type: String,
+      required: false,
+      
+    }
+
+},{timestamps:true})
+
+const Model = mongoose.model('profissionais', profissionaisSchema)
+
+module.exports = Model
