@@ -53,26 +53,49 @@
         }
       }
     },
-    "/profissionais/{id}": {
-      "get": {
+    "/profissionais/create": {
+      "post": {
         "description": "",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "profissao": {
+                  "example": "any"
+                },
+                "bairro": {
+                  "example": "any"
+                },
+                "atendimentoRemoto": {
+                  "example": "any"
+                },
+                "telefone": {
+                  "example": "any"
+                },
+                "site": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
           },
-          "404": {
-            "description": "Not Found"
+          "500": {
+            "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/profissionais/update/{id}": {
       "patch": {
         "description": "",
         "parameters": [
@@ -114,12 +137,14 @@
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not Found"
+          "500": {
+            "description": "Internal Server Error"
           }
         }
-      },
-      "delete": {
+      }
+    },
+    "/profissionais/id/{id}": {
+      "get": {
         "description": "",
         "parameters": [
           {
@@ -133,50 +158,26 @@
           "200": {
             "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "404": {
+            "description": "Not Found"
           }
         }
       }
     },
-    "/profissionais/create": {
-      "post": {
+    "/profissionais/delete/{id}": {
+      "delete": {
         "description": "",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "example": "any"
-                },
-                "profissao": {
-                  "example": "any"
-                },
-                "bairro": {
-                  "example": "any"
-                },
-                "atendimentoRemoto": {
-                  "example": "any"
-                },
-                "telefone": {
-                  "example": "any"
-                },
-                "site": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "201": {
-            "description": "Created"
           },
           "500": {
             "description": "Internal Server Error"
