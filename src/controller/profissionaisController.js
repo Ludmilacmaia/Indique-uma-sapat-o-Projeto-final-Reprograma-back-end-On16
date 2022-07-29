@@ -57,23 +57,67 @@ const getByProfissao = (req, res) => {
     }
   }
 
-  const updateProfissional = async (req, res) => {
-    try {
+  // const updateProfissional = async (req, res) => {
+  //   try {
       
-        const { nome, profissao, bairro, atendimentoRemoto, telefone, site } = req.body
-        await profissional
-          .findByIdAndUpdate(req.params.id, {
-            nome, profissao, bairro, atendimentoRemoto, telefone, site
-          })
-        const updatedProfissional = await profissional.findById(req.params.id)
-        res.status(200).json(updatedProfissional)
-  
-      } catch (error) {
-      console.error(error)
-      res.status(500).json({ message: error.message })
-    }
-  }
+  //       const { nome, profissao, bairro, atendimentoRemoto, telefone, site } = req.body
+  //       const updatedProfissional = await profissional.findByIdAndUpdate(req.params.id, {
+  //           nome, profissao, bairro, atendimentoRemoto, telefone, site
+  //         })
+  //       // const updatedProfissional = await profissional.findById(req.params.id)
+  //       const savedProfissional = await updatedProfissional.save()
+  //       res.status(200).json(savedProfissional)
+        
+  //         // console.log(updatedProfissional)
+  //     } catch (error) {
+  //     console.error(error)
+  //     res.status(500).json({ message: error.message })
+  //   }
+  // }
 
+  // const updateProfissional = async (req, res) => {
+  //   try {
+  //       const {
+  //         id
+  //       } = req.params;
+  //       const {
+  //         nome, profissao, bairro, atendimentoRemoto, telefone, site
+  //       } = req.body;
+  //       const findProfissionais = await profissional.findById(id);
+  //     if (!findProfissionais.length) {
+  //       return res.status(404).json({ message: "Profissional not found" });
+  //     }
+      
+  //       findProfissionais.nome = nome || findProfissionais.nome;
+  //       findProfissionais.profissao = profissao || findProfissionais.profissao;
+  //       findProfissionais.bairro = bairro || findProfissionais.bairro;
+  //       findProfissionais.atendimentoRemoto = atendimentoRemoto || findProfissionais.atendimentoRemoto;
+  //       findProfissionais.telefone = telefone || findProfissionais.telefone;
+  //       findProfissionais.site = site || findProfissionais.site;
+  //       const savedProfissionais = await findProfissionais.save();
+  //       res.status(200).json(savedProfissionais);
+  //   } catch (error) {
+  //     res.status(500).json({
+  //       message: error.message
+  //     });
+  //   }
+  // };
+
+const updateProfissional = async (req, res) => {
+  try {
+    const { nome, profissao, bairro, atendimentoRemoto, telefone, site } = req.body;
+    const updateProfissional = await profissional.findByIdAndUpdate(
+      req.params.id,
+      {
+        nome, profissao, bairro, atendimentoRemoto, telefone, site
+      }
+    );
+    res.status(200).json(updateProfissional);
+  } catch {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
 
 const deleteProfissional = (req, res) => {
   const id = req.params.id

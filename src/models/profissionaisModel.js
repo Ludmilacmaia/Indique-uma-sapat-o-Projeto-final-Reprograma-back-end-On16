@@ -2,7 +2,7 @@ const mongoose = require ('mongoose')
 
 const profissionaisSchema = mongoose.Schema({
     _id: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         default: mongoose.Types.ObjectId
     },
     nome:{

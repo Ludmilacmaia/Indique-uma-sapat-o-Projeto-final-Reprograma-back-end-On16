@@ -5,10 +5,10 @@ const routes = express.Router();
 
 routes.get("/todas", controller.getAll);
 routes.get('/profissao', controller.getByProfissao);
-routes.get('/:id', controller.getById);
 routes.post('/create', controller.createProfissional);
-routes.patch('/:nome', controller.updateProfissional);
-routes.delete('/:id', controller.deleteProfissional);
+routes.patch('/update/:id', controller.updateProfissional);
+routes.get('/id/:id', controller.getById);
+routes.delete('/delete/:id', controller.deleteProfissional);
 
 
 module.exports = routes;
